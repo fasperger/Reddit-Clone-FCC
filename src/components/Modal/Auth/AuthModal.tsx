@@ -5,6 +5,11 @@ import { authModalState } from '@/atoms/authModalAtom';
 import AuthInputs from './AuthInputs';
 import OAuthButtons from './OAuthButtons';
 
+//Modal obtained from Chakra UI -- Modal, 
+//changed the modal state hook so that it 
+//is triggered by buttons and changed according 
+//to global hook atom
+
 const AuthModal: React.FC = () => {
     const [modalState, setModalState] = useRecoilState(authModalState)
     const handleClose = () => {

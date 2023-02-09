@@ -4,7 +4,7 @@ import "@fontsource/open-sans/400.css";
 import "@fontsource/open-sans/700.css";
 import { Button } from "./button";
 
-// 2. Extend the theme to include custom colors, fonts, etc
+// General styles for the whole website
 const colors = {
   brand: {
     100: "#ff3c00",

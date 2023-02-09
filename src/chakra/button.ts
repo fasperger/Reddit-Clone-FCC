@@ -1,5 +1,6 @@
 import { ComponentStyleConfig } from "@chakra-ui/theme";
 
+// global styles using Chakra UI for buttons
 export const Button: ComponentStyleConfig = {
   baseStyle: {
     borderRadius: "60px",

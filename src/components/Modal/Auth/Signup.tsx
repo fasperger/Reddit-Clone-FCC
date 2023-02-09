@@ -5,6 +5,8 @@ import React, { useState } from 'react';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth'
 import { auth } from '@/firebase/clientApp'
 
+
+//Signup is almost the same as login, except for extra confirmPassword field. 
 const Signup: React.FC = () => {
 
     const setAuthModalState = useSetRecoilState(authModalState)

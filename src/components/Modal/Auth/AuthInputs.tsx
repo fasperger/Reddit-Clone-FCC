@@ -5,6 +5,9 @@ import { authModalState } from '@/atoms/authModalAtom';
 import Login from './Login';
 import Signup from './Signup';
 
+
+//Shows login or signup input fleids according of clicked button
+//Due to length and complexity, login and signup forms and design are in separate files.
 type AuthInputsProps = {
 
 };
