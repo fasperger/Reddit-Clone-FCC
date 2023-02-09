@@ -1,4 +1,6 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+### This is a Reddit Clone created following Free Code Camp's Tutorial.
+
+Feb 9, 2023 --> Currently on 1:40:41 in the tutorial
 
 ## Getting Started
 
