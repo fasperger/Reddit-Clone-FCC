@@ -1,7 +1,7 @@
 ### This is a Reddit Clone created following Free Code Camp's Tutorial.
 
-Feb 09, 2023 --> Currently on 1:40:41 in the tutorial
-Feb 10, 2023 --> Currently on 1:56:56 in the tutorial
+Feb 09, 2023 --> Currently on 1:40:41 in the tutorial.
+Feb 10, 2023 --> Currently on 1:56:56 in the tutorial.
 
 ## Getting Started
 
