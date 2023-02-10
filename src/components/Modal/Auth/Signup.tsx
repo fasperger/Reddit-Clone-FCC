@@ -4,6 +4,7 @@ import { Button, Flex, Input, Text } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth'
 import { auth } from '@/firebase/clientApp'
+import { FIREBASE_ERRORS } from '@/firebase/errors'
 
 
 //Signup is almost the same as login, except for extra confirmPassword field. 
@@ -106,7 +107,12 @@ const Signup: React.FC = () => {
                     borderColor: "blue.500"
                 }}
                 bg="gray.50" />
-            {error && (<Text textAlign="center" color="red" fontSize="10pt">{error}</Text>)}
+            <Text textAlign="center" color="red" fontSize="10pt">
+                {error ||
+                    FIREBASE_ERRORS[
+                    userError?.message as keyof typeof FIREBASE_ERRORS
+                    ]}
+            </Text>
             <Button
                 width="100%"
                 height="36px"
