@@ -4,6 +4,8 @@ Feb 09, 2023 --> Currently on 1:40:41 in the tutorial.
 
 Feb 10, 2023 --> Currently on 1:56:56 in the tutorial.
 
+Feb 15, 2023 --> Currently on 2:25:23 in the tutorial.
+
 ## Getting Started
 
 First, run the development server:
