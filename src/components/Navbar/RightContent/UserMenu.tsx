@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, Flex, Menu, MenuButton, MenuList, MenuItem, MenuDivider } from "@chakra-ui/react";
+import { Icon, Flex, Menu, MenuButton, MenuList, MenuItem, MenuDivider, Text } from "@chakra-ui/react";
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import { FaRedditSquare } from "react-icons/fa";
 import { VscAccount } from "react-icons/vsc";
@@ -7,6 +7,7 @@ import { CgProfile } from "react-icons/cg";
 import { signOut, User } from "firebase/auth"
 import { MdOutlineLogin } from "react-icons/md"
 import { auth } from '@/firebase/clientApp';
+import { IoSparkles } from 'react-icons/io5';
 
 type UserMenuProps = {
     user?: User | null;
@@ -23,6 +24,21 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
                         {user ? (
                             <>
                                 <Icon as={FaRedditSquare} fontSize={24} mr={1} color="gray.300" />
+                                <Flex
+                                    direction="column"
+                                    display={{ base: "none", lg: "flex" }}
+                                    fontSize="8pt"
+                                    align="flex-start"
+                                    mr={8}
+                                >
+                                    <Text fontWeight={700}>
+                                        {user?.displayName || user.email?.split("@")[0]}
+                                    </Text>
+                                    <Flex>
+                                        <Icon as={IoSparkles} color="brand.100" mr={1} />
+                                        <Text color="gray.400">1 karma</Text>
+                                    </Flex>
+                                </Flex>
                             </>
 
                         ) : (<Icon as={VscAccount} fontSize={24} mr={1} color="gray.400" />)}
