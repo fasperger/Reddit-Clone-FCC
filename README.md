@@ -6,7 +6,7 @@ Feb 10, 2023 --> Currently on 1:56:56 in the tutorial.
 
 Feb 15, 2023 --> Currently on 2:25:23 in the tutorial.
 
-Feb 24, 2023 --> Currently on 2:38:20 in the tutorial.
+Feb 24, 2023 --> Currently on 2:45:18 in the tutorial.
 
 ## Getting Started
 
