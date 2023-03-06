@@ -1,10 +1,12 @@
 import { useSetRecoilState } from "recoil"
 import { authModalState } from '@/atoms/authModalAtom';
 import { Button, Flex, Input, Text } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth'
-import { auth } from '@/firebase/clientApp'
+import { auth, firestore } from '@/firebase/clientApp'
 import { FIREBASE_ERRORS } from '@/firebase/errors'
+import { addDoc, collection } from "firebase/firestore";
+import { User } from "firebase/auth";
 
 
 //Signup is almost the same as login, except for extra confirmPassword field. 
@@ -19,7 +21,7 @@ const Signup: React.FC = () => {
 
     const [
         createUserWithEmailAndPassword,
-        user,
+        userCred,
         loading,
         userError,
     ] = useCreateUserWithEmailAndPassword(auth);
@@ -40,6 +42,15 @@ const Signup: React.FC = () => {
             [event.target.name]: event.target.value,
         }))
     }
+
+    const createUserDocument = async (user: User) => {
+        await addDoc(collection(firestore, 'users'), JSON.parse(JSON.stringify(user)));
+    }
+    useEffect(() => {
+        if (userCred) {
+            createUserDocument(userCred.user)
+        }
+    }, [userCred])
 
     return (
         <form onSubmit={onSubmit}>
