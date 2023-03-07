@@ -12,7 +12,7 @@ Mar 1, 2023 --> Currently on 3:01:42 in the tutorial.
 
 Mar 6, 2023 --> Currently on 4:02:31 in the tutorial.
 
-Mar 7, 2023 --> Currently on 4:33:39 in the tutorial.
+Mar 7, 2023 --> Currently on 4:51:20 in the tutorial.
 
 ## Getting Started
 
