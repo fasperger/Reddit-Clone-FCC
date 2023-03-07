@@ -5,6 +5,9 @@ import { GetServerSidePropsContext } from 'next/types';
 import React from 'react';
 import { Community } from '@/atoms/communitiesAtom';
 import safeJsonStringify from 'safe-json-stringify';
+import NotFound from '@/components/Community/NotFound';
+import Header from '../../../components/Community/Header';
+import PageContent from "../../../components/Layout/PageContent";
 
 type CommunityPageProps = {
     communityData: Community;
@@ -12,7 +15,20 @@ type CommunityPageProps = {
 
 const CommunityPage: React.FC<CommunityPageProps> = ({ communityData }) => {
 
-    return <div>WELCOME TO {communityData.id}</div>
+    if (!communityData) {
+        return (
+            <NotFound />
+        )
+    }
+    return (
+        <>
+            <Header communityData={communityData} />
+            <PageContent>
+                <>LHS</>
+                <>RHS</>
+            </PageContent>
+        </>
+    )
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
@@ -22,9 +38,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
         return {
             props: {
-                communityData: JSON.parse(
+                communityData: communityDoc.exists() ? JSON.parse(
                     safeJsonStringify({ id: communityDoc.id, ...communityDoc.data() })
-                ),
+                ) : "",
             },
         };
     } catch (error) {
