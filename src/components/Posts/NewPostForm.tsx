@@ -6,9 +6,15 @@ import { BiPoll } from 'react-icons/bi';
 import TabItem from './TabItem';
 import TextInputs from './PostForm/TextInputs';
 import ImageUpload from './PostForm/ImageUpload';
+import { Post } from '@/atoms/postAtom';
+import { User } from 'firebase/auth';
+import { useRouter } from 'next/router';
+import { addDoc, collection, serverTimestamp, Timestamp, updateDoc } from 'firebase/firestore';
+import { firestore, storage } from '@/firebase/clientApp';
+import { getDownloadURL, ref, uploadString } from 'firebase/storage';
 
 type NewPostFormProps = {
-
+    user: User;
 };
 
 const formTabs: TabItem[] = [
@@ -40,18 +46,59 @@ export type TabItem = {
 }
 
 
-const NewPostForm: React.FC<NewPostFormProps> = () => {
-
+const NewPostForm: React.FC<NewPostFormProps> = ({ user }) => {
+    const router = useRouter();
     const [selectedTab, setSelectedTab] = useState(formTabs[0].title);
     const [textInputs, setTextInputs] = useState({
         title: "",
         body: "",
     })
 
-    const [selectedfile, setSelectedFile] = useState<string>();
+    const [selectedFile, setSelectedFile] = useState<string>();
+
     const [loading, setLoading] = useState(false);
 
-    const handleCreatePost = async () => { };
+    const handleCreatePost = async () => {
+
+        const { communityId } = router.query;
+        //new post object make this of type post 
+        const newPost: Post = {
+            communityId: communityId as string,
+            creatorId: user.uid,
+            creatorDisplayName: user.email!.split("@")[0],
+            title: textInputs.title,
+            body: textInputs.body,
+            numberOfComments: 0,
+            voteStatus: 0,
+            createdAt: serverTimestamp() as Timestamp,
+        }
+        setLoading(true);
+
+        try {
+            //store the post in our database    
+            const postDocRef = await addDoc(collection(firestore, "posts"), newPost);
+
+            //check if user has decided to include image 
+            if (selectedFile) {
+                //store in storage  get download function return imageURL
+                const imageRef = ref(storage, `posts/${postDocRef.id}/image`)
+                await uploadString(imageRef, selectedFile, "data_url");
+                // update post doc adding imageURL
+                const downloadURL = await getDownloadURL(imageRef);
+                await updateDoc(postDocRef, {
+                    imageURL: downloadURL,
+                })
+            }
+
+        } catch (error: any) {
+            console.log("handleCreatePost error", error.message);
+        }
+        setLoading(false);
+
+        //redirect user back to community page using the router
+        router.back();
+    };
+
     const onSelectImage = (event: React.ChangeEvent<HTMLInputElement>) => {
         const reader = new FileReader();
         if (event.target.files?.[0]) {
@@ -60,7 +107,7 @@ const NewPostForm: React.FC<NewPostFormProps> = () => {
 
         reader.onload = (readerEvent) => {
             if (readerEvent.target?.result) {
-                setSelectedFile(readerEvent.target.result);
+                setSelectedFile(readerEvent.target.result as string);
             }
         }
     };
@@ -95,7 +142,14 @@ const NewPostForm: React.FC<NewPostFormProps> = () => {
                         loading={loading}
                     />)
                 }
-                {selectedTab === "Images & Video" && <ImageUpload />}
+                {selectedTab === "Images & Video" &&
+                    <ImageUpload
+                        selectedFile={selectedFile}
+                        onSelectImage={onSelectImage}
+                        setSelectedTab={setSelectedTab}
+                        setSelectedFile={setSelectedFile}
+                    />
+                }
             </Flex>
 
         </Flex>
