@@ -2,25 +2,25 @@
 
 Feb 09, 2023 --> Currently on 1:40:41 in the tutorial.
 
-Feb 10, 2023 --> Currently on 1:56:56 in the tutorial.
+Feb 10, 2023 --> Currently on 01:56:56 in the tutorial.
 
-Feb 15, 2023 --> Currently on 2:25:23 in the tutorial.
+Feb 15, 2023 --> Currently on 02:25:23 in the tutorial.
 
-Feb 24, 2023 --> Currently on 2:45:18 in the tutorial.
+Feb 24, 2023 --> Currently on 02:45:18 in the tutorial.
 
-Mar 1, 2023 --> Currently on 3:01:42 in the tutorial.
+Mar 01, 2023 --> Currently on 03:01:42 in the tutorial.
 
-Mar 6, 2023 --> Currently on 4:02:31 in the tutorial.
+Mar 06, 2023 --> Currently on 04:02:31 in the tutorial.
 
-Mar 7, 2023 --> Currently on 4:51:20 in the tutorial.
+Mar 07, 2023 --> Currently on 04:51:20 in the tutorial.
 
-Mar 14, 2023 --> Currently on 5:23:31 in the tutorial.
+Mar 14, 2023 --> Currently on 05:23:31 in the tutorial.
 
-Mar 23, 2023 --> Currently on 5:44:08 in the tutorial.
+Mar 23, 2023 --> Currently on 05:44:08 in the tutorial.
 
-Mar 24, 2023 --> Currently on 6:04:20 in the tutorial.
+Mar 24, 2023 --> Currently on 06:04:20 in the tutorial.
 
-Mar 28, 2023 --> Currently on 6:43:42 in the tutorial.
+Mar 28, 2023 --> Currently on 07:00:00 in the tutorial.
 
 ## Getting Started
 
