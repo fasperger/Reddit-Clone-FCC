@@ -14,11 +14,7 @@ import { firestore, storage } from '@/firebase/clientApp';
 import { getDownloadURL, ref, uploadString } from 'firebase/storage';
 
 
-type NewPostFormProps = {
-    user: User;
-};
-
-const formTabs: TabItem[] = [
+const formTabs = [
     {
         title: "Post",
         icon: IoDocumentText,
@@ -46,6 +42,9 @@ export type TabItem = {
     icon: typeof Icon.arguments;
 }
 
+type NewPostFormProps = {
+    user: User;
+};
 
 const NewPostForm: React.FC<NewPostFormProps> = ({ user }) => {
     const router = useRouter();
