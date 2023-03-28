@@ -1,4 +1,4 @@
-import { Flex, Icon } from '@chakra-ui/react';
+import { Alert, AlertDescription, AlertIcon, AlertTitle, CloseButton, Flex, Icon, Text } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { BsLink45Deg, BsMic } from 'react-icons/bs';
 import { IoDocumentText, IoImageOutline } from 'react-icons/io5';
@@ -12,6 +12,7 @@ import { useRouter } from 'next/router';
 import { addDoc, collection, serverTimestamp, Timestamp, updateDoc } from 'firebase/firestore';
 import { firestore, storage } from '@/firebase/clientApp';
 import { getDownloadURL, ref, uploadString } from 'firebase/storage';
+
 
 type NewPostFormProps = {
     user: User;
@@ -58,6 +59,8 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ user }) => {
 
     const [loading, setLoading] = useState(false);
 
+    const [error, setError] = useState(false);
+
     const handleCreatePost = async () => {
 
         const { communityId } = router.query;
@@ -81,22 +84,23 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ user }) => {
             //check if user has decided to include image 
             if (selectedFile) {
                 //store in storage  get download function return imageURL
-                const imageRef = ref(storage, `posts/${postDocRef.id}/image`)
-                await uploadString(imageRef, selectedFile, "data_url");
+                const imageRef = ref(storage, `posts/${postDocRef.id}/image`);
+                await uploadString(imageRef, selectedFile, 'data_url');
                 // update post doc adding imageURL
                 const downloadURL = await getDownloadURL(imageRef);
                 await updateDoc(postDocRef, {
                     imageURL: downloadURL,
-                })
+                });
             }
-
+            //redirect user back to community page using the router
+            router.back();
         } catch (error: any) {
             console.log("handleCreatePost error", error.message);
+            setError(true);
         }
         setLoading(false);
 
-        //redirect user back to community page using the router
-        router.back();
+
     };
 
     const onSelectImage = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -151,7 +155,13 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ user }) => {
                     />
                 }
             </Flex>
-
+            {error
+                && (
+                    <Alert status="error">
+                        <AlertIcon />
+                        <Text mr={2}>Error creating post</Text>
+                    </Alert>
+                )}
         </Flex>
     )
 }

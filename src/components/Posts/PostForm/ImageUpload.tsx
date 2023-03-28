@@ -16,7 +16,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ selectedFile, onSelectImage, 
         <Flex direction="column" justify="center" align="center" width="100%">
             {selectedFile ? (
                 <>
-                    <Image src={selectedFile} maxWidth="400px" maxHeight="400px" />
+                    <Image src={selectedFile as string} maxWidth="400px" maxHeight="400px" />
                     <Stack direction="row" mt={4}>
                         <Button height="28px" onClick={() => setSelectedTab("Post")}>Back to Post</Button>
                         <Button variant="outline" height="28px" onClick={() => setSelectedFile('')}>Remove</Button>
@@ -35,9 +35,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ selectedFile, onSelectImage, 
                     <Button
                         variant="outline"
                         height="28px"
-                        onClick={() => {
-                            selectedFileRef.current?.click()
-                        }}
+                        onClick={() => selectedFileRef.current?.click()}
                     >
                         Upload
                     </Button>
